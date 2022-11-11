@@ -10,20 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import servletPackage.Shows;
+import servletPackage.ShowWeek;
 /**
  * Servlet implementation class Servlet
  */
 @WebServlet("/Servlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Shows myData;       
+	private Shows allData;       
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Servlet() {
         super();
-        myData = new Shows();
+        allData = new Shows("allData","./servletPackage/netflixAllWeeksGlobalProcessed.txt");
+ 
         // TODO Auto-generated constructor stub
     }
 
@@ -36,19 +38,19 @@ public class Servlet extends HttpServlet {
 		String pass = request.getParameter("passWord");
 		request.setAttribute("userName",user); 
 		request.setAttribute("passWord",pass); 
-		myData = new Shows("allData","./project1/netflixAllWeeksGlobalProcessed.txt");
 		
 		if(request.getParameter("Login")!=null) {
             if(user.equals("md") && pass.equals("pw")) {
-            	ArrayList<ShowWeek> moviesInWeek = myData.getOneWeek("2021-07-04");
-    			
-				String [] data = new String[moviesInWeek.size()];
-				int index = 0;
-				for (ShowWeek sw : moviesInWeek){
-					data[index] = sw.getShowTitle();
-					index++;
-				}
-				request.setAttribute("dropDownOptions",data); 	
+            	
+            	ArrayList<ShowWeek> moviesInWeek = allData.getOneWeek("2021-07-04");
+    			String hello = allData.toString();
+//				String [] data = new String[moviesInWeek.size()];
+//				int index = 0;
+//				for (ShowWeek sw : moviesInWeek){
+//					data[index] = sw.getShowTitle();
+//					index++;
+//				}
+				request.setAttribute("dropDownOptions",hello); 	
 				RequestDispatcher rd=request.getRequestDispatcher("/Main.jsp");
 				rd.forward(request,response);
             } else {

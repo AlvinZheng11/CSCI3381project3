@@ -148,7 +148,7 @@ public class Shows {
 	}
 
 	//file stuff reworked
-	private void readFile () {
+	void readFile () {
 		BufferedReader lineReader = null;
 		try {
 			FileReader fr = new FileReader(fileName);

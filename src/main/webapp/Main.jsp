@@ -11,7 +11,7 @@
 		String name = (String) request.getAttribute("userName");
 	%>
 	<%=name%> 
-<form action="/project3t/Servlet" method="get">
+<form action="/CSCI3381project3/Servlet" method="get">
 	    <input type="hidden" value=<%=name%> name="userName">
 		<%
 			String selectionText = (String) request.getAttribute("dropDownOptions");
