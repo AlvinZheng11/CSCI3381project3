@@ -39,14 +39,9 @@ public class Servlet extends HttpServlet {
 		myData = new Shows("allData","./project1/netflixAllWeeksGlobalProcessed.txt");
 		
 		if(request.getParameter("Login")!=null) {
-//			if(user != "md" && pass != "pw") {
-//				RequestDispatcher rd=request.getRequestDispatcher("/index.html");
-//				rd.forward(request,response);
-//			}
-//			else
-//			{
-				ArrayList<ShowWeek> moviesInWeek = myData.getOneWeek("2021-07-04");
-			
+            if(user.equals("md") && pass.equals("pw")) {
+            	ArrayList<ShowWeek> moviesInWeek = myData.getOneWeek("2021-07-04");
+    			
 				String [] data = new String[moviesInWeek.size()];
 				int index = 0;
 				for (ShowWeek sw : moviesInWeek){
@@ -56,9 +51,14 @@ public class Servlet extends HttpServlet {
 				request.setAttribute("dropDownOptions",data); 	
 				RequestDispatcher rd=request.getRequestDispatcher("/Main.jsp");
 				rd.forward(request,response);
+            } else {
+                RequestDispatcher rd =request.getRequestDispatcher("/index.html");
+                rd.forward(request,response);
+		
+				
 			}
 		}
-	//}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
