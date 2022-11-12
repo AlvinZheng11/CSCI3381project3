@@ -13,10 +13,10 @@
 	<%=name%> 
 <form action="/CSCI3381project3/Servlet" method="get">
 	    <input type="hidden" value=<%=name%> name="userName">
-		<%
-			String selectionText = (String) request.getAttribute("dropDownOptions");
-		%>
+		<%String selectionText = (String) request.getAttribute("dropDownOptions");%>
+		
 		Please select a Movie:<br><%=selectionText%><br> 
+		
 		<input type="submit" value="Get Info!" name="getCarInfo">
 </form>
 </body>

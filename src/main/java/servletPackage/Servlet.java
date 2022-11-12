@@ -19,6 +19,7 @@ import servletPackage.ShowWeek;
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Shows allData;       
+	private String data;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,6 +27,9 @@ public class Servlet extends HttpServlet {
         super();
         allData = new Shows("allData","./servletPackage/netflixAllWeeksGlobalProcessed.txt");
  
+        data = "<select name=\"genres\">";
+        data += allData.toStringTitle();
+        data += "</select>"; 
         // TODO Auto-generated constructor stub
     }
 
@@ -42,15 +46,15 @@ public class Servlet extends HttpServlet {
 		if(request.getParameter("Login")!=null) {
             if(user.equals("md") && pass.equals("pw")) {
             	
-            	ArrayList<ShowWeek> moviesInWeek = allData.getOneWeek("2021-07-04");
-    			String hello = allData.toString();
+//    			data = allData.toStringTitle();
+    			
 //				String [] data = new String[moviesInWeek.size()];
 //				int index = 0;
 //				for (ShowWeek sw : moviesInWeek){
 //					data[index] = sw.getShowTitle();
 //					index++;
 //				}
-				request.setAttribute("dropDownOptions",hello); 	
+				request.setAttribute("dropDownOptions",data); 	
 				RequestDispatcher rd=request.getRequestDispatcher("/Main.jsp");
 				rd.forward(request,response);
             } else {

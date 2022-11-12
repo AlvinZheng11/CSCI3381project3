@@ -147,6 +147,23 @@ public class Shows {
 		return toReturn;
 	}
 
+	public String toStringTitle() {
+		// returns a string representation of this showWeeks
+		String toReturn = "";
+		int count = 0;
+		for (ShowWeek s : showWeeks) {
+			if(purgeCheck(s.getShowTitle())== true)
+				continue;
+			toReturn += "<option value=\""+s.getShowTitle()+"\">"+s.getShowTitle()+"</option>";
+			count++;
+			if(count >= 20) 
+			{
+				return toReturn;
+			}
+		}	
+		return toReturn;
+	}
+	
 	//file stuff reworked
 	void readFile () {
 		BufferedReader lineReader = null;
