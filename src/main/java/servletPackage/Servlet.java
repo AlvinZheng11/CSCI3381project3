@@ -50,6 +50,7 @@ public class Servlet extends HttpServlet {
 		request.setAttribute("userName",user); 
 		request.setAttribute("passWord",pass); 
 
+		//checks for username and pass and creates dropdown
 		if(request.getParameter("index")!=null) {
 			user = request.getParameter("userName");
 			pass = request.getParameter("passWord");
@@ -71,32 +72,39 @@ public class Servlet extends HttpServlet {
 
 			}
 		}
+		//changes pages to AddMovie
 		if(request.getParameter("addingMovie")!=null) {
 			RequestDispatcher rd =request.getRequestDispatcher("/AddMovie.jsp");
 			rd.forward(request,response);
 		}
-		if(request.getParameter("addMovie")!=null) {
-			week = request.getParameter("Week");
-			category = request.getParameter("Category");
-			rank = request.getParameter("Rank");
-			showTitle = request.getParameter("ShowTitle");
-			seasonTitle = request.getParameter("SeasonTitle");
-			hoursViewed = request.getParameter("HrsViewed");
-			WeeksTop10 = request.getParameter("WeeksTop10");
-
-			request.setAttribute("Week",week); 
-			request.setAttribute("Category",category); 
-			request.setAttribute("Rank",rank); 
-			request.setAttribute("ShowTitle",showTitle); 
-			request.setAttribute("SeasonTitle",seasonTitle); 
-			request.setAttribute("HrsViewed",hoursViewed); 
-			request.setAttribute("WeeksTop10",WeeksTop10); 
-
-			String Add = week+category+rank+showTitle+seasonTitle+hoursViewed+WeeksTop10;
-			data += Add;
-			RequestDispatcher rd=request.getRequestDispatcher("/index.html");
+		//change page to Movie
+		if(request.getParameter("selectMovie")!=null) {
+			RequestDispatcher rd =request.getRequestDispatcher("/Movie.jsp");
 			rd.forward(request,response);
 		}
+//		if(request.getParameter("addMovie")!=null) {
+//			week = request.getParameter("Week");
+//			category = request.getParameter("Category");
+//			rank = request.getParameter("Rank");
+//			showTitle = request.getParameter("ShowTitle");
+//			seasonTitle = request.getParameter("SeasonTitle");
+//			hoursViewed = request.getParameter("HrsViewed");
+//			WeeksTop10 = request.getParameter("WeeksTop10");
+//
+//			request.setAttribute("Week",week); 
+//			request.setAttribute("Category",category); 
+//			request.setAttribute("Rank",rank); 
+//			request.setAttribute("ShowTitle",showTitle); 
+//			request.setAttribute("SeasonTitle",seasonTitle); 
+//			request.setAttribute("HrsViewed",hoursViewed); 
+//			request.setAttribute("WeeksTop10",WeeksTop10); 
+//
+//			String Add = week+category+rank+showTitle+seasonTitle+hoursViewed+WeeksTop10;
+//			data += Add;
+//			RequestDispatcher rd=request.getRequestDispatcher("/index.html");
+//			rd.forward(request,response);
+//		}
+		//repopulates the dropdown with new info
 		if(request.getParameter("newMain")!=null) {
 			showTitle = request.getParameter("ShowTitle");
 			user = request.getParameter("userName");
@@ -111,6 +119,22 @@ public class Servlet extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher("/Main.jsp");
 			rd.forward(request,response);
 		}
+		
+		if(request.getParameter("backMain")!=null) {
+			showTitle = request.getParameter("ShowTitle");
+			user = request.getParameter("userName");
+			pass = request.getParameter("passWord");
+			
+			data = "<select name=\"Shows\">";
+			data += allData.toStringTitle();
+			data += "<option value=\""+showTitle+"\">"+showTitle+"</option>";
+			data += "</select>";
+			
+			request.setAttribute("dropDownOptions",data); 	
+			RequestDispatcher rd=request.getRequestDispatcher("/Main.jsp");
+			rd.forward(request,response);
+		}
+		//handles logout for the user
 		if(request.getParameter("logout")!=null) {
 			RequestDispatcher rd =request.getRequestDispatcher("/index.html");
 			rd.forward(request,response);

@@ -33,7 +33,7 @@ div {
 		<%String selectionText = (String) request.getAttribute("dropDownOptions");%>
 		
 		Please select a Movie:<br><%=selectionText%><br> 
-		
+		<input type="submit" value="Select Movie" name="selectMovie">
 		<br>
 		<input type="submit" value="Add a Movie" name="addingMovie">
 		<br>
